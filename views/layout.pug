@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+  head
+    title= title
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    //- Serve static resources
+    link(rel="stylesheet" href="/stylesheets/styles.css")
+    script(src="https://cdn.jsdelivr.net/npm/vue@2")
+  body
+    //- Fix 3: Wrap everything in #container so Vue can mount correctly
+    div#container
+      include components/header.pug
+      
+      block content
+      
+      include components/footer.pug
+
+    //- Custom Vue JS mounting file (app.js) loaded at the bottom of the body
+    script(src="/javascripts/app.js")
