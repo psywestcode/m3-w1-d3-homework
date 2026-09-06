@@ -9,7 +9,7 @@ Vue.component('blogtitle', {
 
 // 2. Initialize the Vue App Instance
 const app = new Vue({
-    el: '#container', // Mounts to div#container in layout.pug
+    el: '#app', // Mounts to div#app in layout.pug
     data: {
         posts: [
             {

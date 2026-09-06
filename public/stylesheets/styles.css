@@ -1,133 +1,220 @@
-/* Custom Foodblog Layout Styling */
+/* Reset and General Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #333;
-  background-color: #fafafa;
-  line-height: 1.6;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #faf5e6; /* Matches the warm cream background */
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
+/* Two-Column Sidebar Grid Layout */
+main {
+    display: grid;
+    grid-template-columns: 320px 1fr; /* Left Sidebar: 320px | Right Content: 1fr */
+    flex: 1;
 }
 
-/* Header navigation styling */
-.blog-header {
-  background-color: #ffffff;
-  padding: 30px 0;
-  border-bottom: 1px solid #eaeaea;
-  text-align: center;
+/* Side-by-side elements sharing the teal column */
+h2, aside#photos {
+    background-color: #59c2a6; /* Vibrant teal green sidebar background */
+    grid-column: 1;
 }
 
-.blog-logo {
-  font-size: 2.6em;
-  color: #d9534f;
-  margin: 0;
+/* 1. Header/Logo in Sidebar */
+h2 {
+    padding: 50px 20px 10px 40px;
+    font-family: 'Brush Script MT', 'Playfair Display', cursive;
+    font-size: 3.2em;
+    color: #df8f37; /* Warm orange cursive text styling */
+    font-weight: normal;
 }
 
-.blog-tagline {
-  color: #777;
-  font-style: italic;
-  margin: 5px 0 20px 0;
+/* 2. Chili Image in Sidebar */
+aside#photos {
+    padding: 10px 20px 40px 40px;
 }
 
-.blog-nav a {
-  margin: 0 15px;
-  color: #555;
-  text-decoration: none;
-  font-weight: 600;
+aside#photos img {
+    border: 6px solid #ffffff; /* White card frame */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); /* Soft drop shadow */
+    border-radius: 4px;
+    display: block;
 }
 
-.blog-nav a:hover {
-  color: #d9534f;
+/* Right Content Area (Comments Section) */
+section#blogposts {
+    grid-column: 2;
+    padding: 50px 60px;
+    background-color: #faf5e6;
 }
 
-/* Banner section */
-.hero-banner {
-  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/images/hero-bg.jpg') no-repeat center center/cover;
-  color: white;
-  padding: 110px 40px;
-  border-radius: 8px;
-  margin: 40px 0;
-  text-align: center;
+/* Injects "COMMENTS" header via pseudo-element to match target layout */
+section#blogposts::before {
+    content: "COMMENTS";
+    display: block;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #00a885; /* Vibrant green label */
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
-.hero-text h2 {
-  font-size: 2.6em;
-  margin-bottom: 15px;
+section#blogposts ul {
+    list-style-type: none;
 }
 
-.btn {
-  background-color: #d9534f;
-  color: white;
-  padding: 10px 25px;
-  border-radius: 4px;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 600;
+/* White Comment Cards */
+li#posts {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-columns: 65px 1fr; /* Avatar on left, content on right */
+    position: relative;
 }
 
-/* Recipes Layout grid */
-.recipes-grid {
-  margin: 60px 0;
+/* Profile image wrapper */
+span.profile {
+    grid-column: 1;
 }
 
-.section-title {
-  font-size: 1.8em;
-  border-bottom: 2px solid #eaeaea;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
+span.profile img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #cccccc;
+    transition: transform 0.2s ease;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+span.profile img:hover {
+    transform: scale(1.05);
 }
 
-.card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+/* Text layouts */
+span.author {
+    grid-column: 2;
+    font-weight: bold;
+    color: #555555;
+    font-size: 1.05em;
 }
 
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+span.date {
+    font-size: 0.9em;
+    color: #888888;
+    margin-left: 10px;
 }
 
-.card-body {
-  padding: 20px;
+span.reply {
+    float: right;
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #444444;
+    cursor: pointer;
 }
 
-.tag {
-  background: #f0f0f0;
-  color: #777;
-  padding: 3px 8px;
-  font-size: 0.8em;
-  border-radius: 4px;
+span.reply:hover {
+    color: #00a885;
 }
 
-.read-more {
-  color: #d9534f;
-  text-decoration: none;
-  font-weight: bold;
+li#posts p {
+    grid-column: 2;
+    margin-top: 10px;
+    color: #444444;
+    font-size: 1em;
+    line-height: 1.5;
 }
 
-/* Footer style rules */
-.blog-footer {
-  background-color: #222222;
-  color: #aaaaaa;
-  text-align: center;
-  padding: 40px 0;
-  margin-top: 60px;
-  font-size: 0.9em;
+/* Modal Popup Box Style */
+#info_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    border: 2px solid #59c2a6;
+    border-radius: 12px;
+    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    z-index: 1000;
 }
 
-.blog-footer p {
-  margin: 5px 0;
+#info_title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #59c2a6;
+    padding-bottom: 5px;
+}
+
+#info_foodie {
+    font-weight: bold;
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+#info_foodie span {
+    color: #888888;
+    font-weight: normal;
+}
+
+#info_bio {
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+#info_bio span {
+    color: #888888;
+    font-weight: normal;
+}
+
+/* Modal Buttons */
+.closeBtn {
+    cursor: pointer;
+}
+
+.closeBtnP {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.4em;
+    color: #888888;
+}
+
+.closeBtnB {
+    background-color: #59c2a6;
+    color: #ffffff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    float: right;
+}
+
+.closeBtnB:hover {
+    background-color: #45b095;
+}
+
+/* Footer Section */
+footer {
+    background-color: #faf5e6;
+    color: #666666;
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9em;
+    border-top: 1px solid #e0e0e0;
 }

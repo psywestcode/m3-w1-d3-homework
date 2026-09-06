@@ -2,15 +2,16 @@ extends layout
 
 block content
   main
+    //- Left Sidebar Image Card
     aside#photos
       img(src="/images/chili.jpg" alt="White Chicken Chili" width="180")
     
-    //- Render the custom blogtitle element
+    //- Render the cursive <blogtitle> component
     h2: blogtitle
 
+    //- Comments section
     section#blogposts
       ul
-        //- Loop through Vue posts array
         li#posts(v-for="post in posts")
           span.profile
             img(v-bind:src="post.profilepic" v-on:click="authorinfo(posts, post)")
@@ -20,9 +21,9 @@ block content
           span.reply {{ post.reply }}
           p {{ post.message }}
         
-        //- Vue info box popup triggered by thisBox state
+        //- Bio Modal Popup
         div#info_box(v-for="post in posts" v-if="post.thisBox")
-          p.closeBtn.closeBtnP(v-on:click="$emit('close', post.thisBox = false)") &#10006;
+          p.closeBtn.closeBtnP(v-on:click="post.thisBox = false") &#10006;
           div#info_title {{ post.name }}
           div#info_foodie
             span Foodie Level: 
@@ -31,5 +32,5 @@ block content
             span Bio:
             br
             | {{ post.bio }}
-          button.closeBtn.closeBtnB(v-on:click="$emit('close', post.thisBox = false)") Close
+          button.closeBtn.closeBtnB(v-on:click="post.thisBox = false") Close
           p#close_info
